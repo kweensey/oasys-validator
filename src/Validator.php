@@ -29,6 +29,7 @@ class Validator
     'notEmpty'              => '{field} cannot be empty',
     'requireOn'             => '{field} is required when {conditionField} is set',
     'requireWhen'           => '{field} is required when {conditionField} is {conditionValue}',
+    'requireWhenNot'        => '{field} is required when {conditionField} is not {conditionValue}',
     'regex'                 => '{field} has invalid format',
     'format'                => '{field} has invalid format',
     'type'                  => '{field} must be of type {type}',

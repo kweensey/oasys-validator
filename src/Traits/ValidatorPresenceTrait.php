@@ -89,6 +89,32 @@ trait ValidatorPresenceTrait
   }
 
   /**
+   * Require the field to be present when another field has not specified value
+   *
+   * @param string      $field          The name of the field to require
+   * @param string      $conditionField The name of the condition field
+   * @param mixed       $conditionValue The value of the condition field
+   * @param string|null $message        Custom error message (optional; default = from dictionary)
+   *
+   * @return self Self-reference
+   */
+  public function requireWhenNot(string $field, string $conditionField, mixed $conditionValue, ?string $message = null): self
+  {
+    $this->rules[$field][] = [
+      fn(mixed $value): bool => ! self::isEmpty($value)
+        || ! array_key_exists($conditionField, $this->data)
+        || self::isEmpty($this->data[$conditionField])
+        || $this->data[$conditionField] === $conditionValue,
+      [
+        $message ?? $this->messages[__FUNCTION__],
+        compact('field', 'conditionField', 'conditionValue')
+      ]
+    ];
+
+    return $this;
+  }
+
+  /**
    * Validate that a field's value is not empty
    *
    * @param string ...$fields The names of fields to validate

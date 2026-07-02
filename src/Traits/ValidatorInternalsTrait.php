@@ -265,7 +265,7 @@ trait ValidatorInternalsTrait
           : 'false';
       } elseif ($value === null) {
         $value = 'null';
-      } else if (is_object($value) && ! $value instanceof Stringable) {
+      } else if (is_object($value)) {
         $value = get_debug_type($value);
       } else {
         $value = (string) $value;
