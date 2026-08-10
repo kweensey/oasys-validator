@@ -100,7 +100,7 @@ trait ValidatorFormatTrait
 
     $this->rules[$field][] = [
       fn(mixed $value): bool => self::isEmpty($value)
-        || gettype($value) === $normalized
+        || in_array(gettype($value), $normalized === 'double' ? ['double', 'integer'] : [$normalized], true)
         || is_object($value) && $isClassLike && $value instanceof $normalized,
       [
         $message ?? $this->messages[__FUNCTION__],
