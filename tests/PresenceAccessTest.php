@@ -135,4 +135,24 @@ final class PresenceAccessTest extends TestCase
 
         self::assertSame([], $result);
     }
+
+    public function testRequireWhenNotTriggersOnDifferentValue(): void
+    {
+        $result = (new Validator())
+            ->requireWhenNot('state', 'country', 'US')
+            ->validate(['country' => 'CA']);
+
+        self::assertSame([
+            'state' => 'state is required when country is not US',
+        ], $result);
+    }
+
+    public function testRequireWhenSkipsOnExactMatch(): void
+    {
+        $result = (new Validator())
+            ->requireWhenNot('state', 'country', 'CZ')
+            ->validate(['country' => 'CZ']);
+
+        self::assertSame([], $result);
+    }
 }
