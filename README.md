@@ -189,8 +189,9 @@ $result = new Validator()
 ---
 
 #### `requireWhen(string $field, string $conditionField, mixed $conditionValue, ?string $message = null)`
+#### `requireWhenNot(string $field, string $conditionField, mixed $conditionValue, ?string $message = null)`
 
-If `$conditionField` equals `$conditionValue`, field must be present and non-empty
+If `$conditionField` (not) equals `$conditionValue`, field must be present and non-empty
 
 ```php
 $payload = [
